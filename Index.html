@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love! ❤️</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+            color: #4a4a4a;
+            overflow-x: hidden;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: rgba(255, 105, 180, 0.7);
+            animation: float 6s ease-in infinite;
+            bottom: -50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header Section */
+        header {
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #d63384;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        /* Interactive Button Section */
+        .celebrate-btn {
+            background: #d63384;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.4);
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .celebrate-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: #b8256f;
+            box-shadow: 0 6px 20px rgba(214, 51, 132, 0.6);
+        }
+
+        /* Photo Gallery Section */
+        .gallery-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #d63384;
+            margin: 40px 0 20px 0;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Love Letter Card */
+        .letter-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 50px auto;
+            text-align: left;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .letter-card h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #d63384;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .letter-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Secret Message Envelope */
+        .secret-section {
+            margin: 40px 0;
+        }
+
+        .secret-btn {
+            background: #fff;
+            color: #d63384;
+            border: 2px solid #d63384;
+            padding: 12px 25px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .secret-btn:hover {
+            background: #d63384;
+            color: white;
+        }
+
+        #secret-message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff0f5;
+            border-radius: 15px;
+            border: 2px dashed #d63384;
+            font-size: 1.1rem;
+            color: #d63384;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            h1 { font-size: 3rem; }
+            .letter-card { padding: 25px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Floating Hearts Container -->
+    <div id="hearts-container"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Happy Birthday, Dudu! 💖</h1>
+            <p class="subtitle">To the most amazing person in my world.</p>
+            
+            <button class="celebrate-btn" onclick="celebrate()">Click to Celebrate! 🎉</button>
+        </header>
+
+        <!-- Love Letter Section -->
+        <section class="letter-card">
+            <h2>Dearest Dudu,</h2>
+            <p>Today is all about celebrating <strong>you</strong>—the person who fills my life with endless joy, laughter, and warmth.</p>
+            <p>Every moment spent with you feels like a beautiful dream. Thank you for being my best friend, my biggest cheerleader, and my favorite person in the entire universe.</p>
+            <p>May this year bring you all the happiness, success, and love you so truly deserve. I promise to stand by your side for every step of the way.</p>
+            <p style="text-align: right; font-family: 'Dancing Script', cursive; font-size: 2rem; color: #d63384; margin-top: 20px;">
+                Forever & Always,<br>
+                Bubu ❤️
+            </p>
+        </section>
+
+        <!-- Photo Memories Gallery -->
+        <h2 class="gallery-title">Our Favorite Moments ✨</h2>
+        <section class="gallery">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=500&q=80" alt="Memory 1">
+                <p>"Our magical adventures together 🌟"</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=80" alt="Memory 2">
+                <p>"Endless laughs and sweet memories ❤️"</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=500&q=80" alt="Memory 3">
+                <p>"To many more years of happiness 🥂"</p>
+            </div>
+        </section>
+
+        <!-- Secret Surprise Note -->
+        <section class="secret-section">
+            <button class="secret-btn" onclick="toggleSecret()">💌 Click for a Secret Note</button>
+            <div id="secret-message">
+                "P.S. Get ready for your birthday surprise tonight! 🎁✨"
+            </div>
+        </section>
+
+        <!-- Optional Background Song -->
+        <audio id="birthday-song" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+
+        <footer>
+            <p>Made with ❤️ especially for Dudu by Bubu.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Confetti & Song function
+        function celebrate() {
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+
+            var song = document.getElementById('birthday-song');
+            if (song.paused) {
+                song.play();
+            }
+        }
+
+        // Toggle Secret Message
+        function toggleSecret() {
+            var msg = document.getElementById("secret-message");
+            if (msg.style.display === "block") {
+                msg.style.display = "none";
+            } else {
+                msg.style.display = "block";
+            }
+        }
+
+        // Generate Floating Hearts Background
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            
+            document.getElementById('hearts-container').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
